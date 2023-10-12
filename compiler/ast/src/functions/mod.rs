@@ -38,7 +38,7 @@ pub use output::*;
 pub mod mode;
 pub use mode::*;
 
-use crate::{Block, Identifier, Node, NodeID, Tuple, Type};
+use crate::{Block, FunctionStub, Identifier, Node, NodeID, Tuple, Type};
 use leo_span::{sym, Span, Symbol};
 
 use serde::{Deserialize, Serialize};
@@ -140,6 +140,23 @@ impl Function {
             write!(f, " finalize ({parameters}) {}", finalize.block)
         } else {
             Ok(())
+        }
+    }
+}
+
+impl From<FunctionStub> for Function {
+    fn from(function: FunctionStub) -> Self {
+        Self {
+            annotations: function.annotations,
+            variant: function.variant,
+            identifier: function.identifier,
+            input: function.input,
+            output: function.output,
+            output_type: function.output_type,
+            block: function.block,
+            finalize: function.finalize,
+            span: function.span,
+            id: function.id,
         }
     }
 }
