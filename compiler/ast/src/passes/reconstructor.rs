@@ -379,6 +379,7 @@ pub trait ProgramReconstructor: StatementReconstructor {
 
     fn reconstruct_stub(&mut self, input: Stub) -> Stub {
         Stub {
+            imports: input.imports,
             stub_id: input.stub_id,
             consts: input.consts,
             structs: input.structs,
